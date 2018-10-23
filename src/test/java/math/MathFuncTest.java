@@ -61,4 +61,13 @@ public class MathFuncTest {
 		assertEquals(4, mathFuncs.longestConsecutive(Arrays.asList(-1, -2, 2, -4, 4, 3, -3)));
 	}
 
+	@Test
+	public void testLCS() {
+		System.out.println("Testing LCS");
+		assertEquals("notfcaon", mathFuncs.getLCS("notification", "notefucashon"));
+		assertEquals("ABCABC", mathFuncs.getLCS("ABCABCBA", "CBABCABCC"));
+		assertEquals("ABAB", mathFuncs.getLCS("ABAB", "ABABAB"));
+		assertEquals("ACT", mathFuncs.getLCS("GACT", "AGCAT"));
+		assertEquals("ABCAAABBACABACABABABCB", mathFuncs.getLCS("ABCAAABBABBCCABCBACABABABCCBC", "ABCABABABCBACABCBACABABACBCB"));
+	}
 }
