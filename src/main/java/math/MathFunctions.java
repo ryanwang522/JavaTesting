@@ -3,10 +3,8 @@ package math;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class MathFunctions {
 
@@ -184,59 +182,6 @@ public class MathFunctions {
 			last = current;
 		}
 		return max;
-	}
-	
-	/**
-	 * Given an array or list of objects, return a set of all possible subsets.
-	 * 
-	 * @author Tzipora Ziegler
-	 */
-	public <T> Set<Set<T>> getPowerset(T[] originalSet, int start) {
-		Set<Set<T>> sets = new HashSet<Set<T>>();
-
-		if (originalSet.length == 0 || start >= originalSet.length) {
-			sets.add(new HashSet<T>());
-			return sets;
-		}
-
-		T head = originalSet[start];
-
-		for (Set<T> set : getPowerset(originalSet, ++start)) {
-			Set<T> newSet = new HashSet<T>();
-			newSet.add(head);
-			newSet.addAll(set);
-			sets.add(newSet);
-			sets.add(set);
-		}
-		return sets;
-	}
-
-	/**
-	 * This function uses Generics and Sets.
-	 * <p>
-	 * The complexity of the function is O(2^n), since it needs to generate 2^n possible combinations.
-	 */
-	public <T> Set<Set<T>> getPowerset(Set<T> originalSet) {
-		Set<Set<T>> sets = new HashSet<Set<T>>();
-
-		if (originalSet.isEmpty()) {
-			sets.add(new HashSet<T>());
-			return sets;
-		}
-
-		List<T> list = new ArrayList<T>(originalSet);
-		T head = list.get(0);
-
-		// list.remove(0);
-
-		for (Set<T> set : getPowerset(new HashSet<T>(list.subList(1, list.size())))) {
-			Set<T> newSet = new HashSet<T>();
-			newSet.add(head);
-			newSet.addAll(set);
-			sets.add(newSet);
-			sets.add(set);
-		}
-		return sets;
 	}
 	
 	public <E> List<E> LCS(E[] s1, E[] s2) {
