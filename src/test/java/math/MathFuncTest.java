@@ -25,10 +25,9 @@ public class MathFuncTest {
 		assertEquals(0, mathFuncs.getElementMemoization(0, new int[0]));
 		assertEquals(13, mathFuncs.getElementMemoization(7, new int[7]));
 		assertEquals(34, mathFuncs.getElementMemoization(9, new int[9]));
-		
-		/* Test long type argument */
-		//assertEquals(4660046610375530309L, (long) mathFuncs.getElement(91));
-		//assertEquals(4660046610375530309L, (long) mathFuncs.getElementMemoization(91, new int[91]));
+
+		assertEquals(-1, mathFuncs.getElementMemoization(91, new int[9]));
+		//assertEquals(4660046610375530309L, mathFuncs.getElementMemoization(91, new int[91]));
 	}
 
 	@Test
@@ -68,6 +67,18 @@ public class MathFuncTest {
 		assertEquals("ABCABC", mathFuncs.getLCS("ABCABCBA", "CBABCABCC"));
 		assertEquals("ABAB", mathFuncs.getLCS("ABAB", "ABABAB"));
 		assertEquals("ACT", mathFuncs.getLCS("GACT", "AGCAT"));
-		//assertEquals("ABCAAABBACABACABABABCB", mathFuncs.getLCS("ABCAAABBABBCCABCBACABABABCCBC", "ABCABABABCBACABCBACABABACBCB"));
+		assertEquals("CAAC".length(), mathFuncs.getLCS("CDDABDACBC", "DCAAAACD").length());
+		assertEquals("BBBCCDBBDCCCCB".length(), mathFuncs.getLCS("ACBBBCACDCBBCBDCBDADCDCCBD", "DDDBBAAAABCCDDBDDDBDCCCCB").length());
+		assertEquals("ABCAAABBACABCBACABABABCB".length(), mathFuncs.getLCS("ABCAAABBABBCCABCBACABABABCCBC", "ABCABABABCBACABCBACABABACBCB").length());
+	}
+	
+	@Test
+	public void testStrMult() {
+		System.out.println("Testing string multiply");
+		assertEquals("100", mathFuncs.multiply("10","10"));
+		assertEquals("13080", mathFuncs.multiply("0654","00020"));
+		assertEquals("1100", mathFuncs.multiply("10","110"));
+		assertEquals("22403408409395200", mathFuncs.multiply("34359738368","652025"));
+		assertEquals("0", mathFuncs.multiply("", ""));
 	}
 }

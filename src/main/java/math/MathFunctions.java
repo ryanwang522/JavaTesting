@@ -42,6 +42,11 @@ public class MathFunctions {
 		if (position == 1 || position == 2) {
 			return 1;
 		}
+		
+		if (position > 46) {
+			System.out.println("Integer Overflow");
+			return -1;
+		}
 
 		return getElement(position - 1) + getElement(position - 2); // tail recursion
 	}
@@ -65,6 +70,11 @@ public class MathFunctions {
 
 		if (position == 1 || position == 2) {
 			return 1;
+		}
+		
+		if (position > 46) {
+			System.out.println("Integer Overflow");
+			return -1;
 		}
 
 		if (memo[position - 2] == 0) {
@@ -252,7 +262,7 @@ public class MathFunctions {
             // if the elements are the same, then we add the element
             // from s1 to our linkedlist.
             if (s1[s1position-1].equals(s2[s2position-1])) {
-                result.add(s1[s1position-1]);
+                result.add(s2[s2position-1]);
                 s1position--;
                 s2position--;
             }
@@ -301,12 +311,63 @@ public class MathFunctions {
         
 	}
 	
+	public String multiply(String a, String b) {
+		if ("0".equals(a) || "0".equals(b))
+		{
+			return "0";
+		}
+
+		final ArrayList<Integer> productArray = new ArrayList<Integer>();
+		int moveOver = 1;
+
+		for (int j = b.length() - 1; j >= 0; j--) {
+			int leftover = 0;
+			int position = productArray.size() - moveOver++;
+			final int bottomDigit = Character.getNumericValue(b.charAt(j));
+
+			for (int i = a.length() - 1; i >= 0; i--) {
+				final int topDigit = Character.getNumericValue(a.charAt(i));
+				final int currentDigit = position >= 0 ? productArray.get(position) : 0;
+				final int product = bottomDigit * topDigit + leftover + currentDigit;
+				final int placeNumber = product % 10;
+				leftover = product / 10;
+
+				if (position >= 0) {
+					productArray.set(position, placeNumber);
+				}
+				else {
+					productArray.add(0, placeNumber);
+				}
+
+				position--;
+			}
+
+			if (leftover != 0) {
+				productArray.add(0, leftover);
+			}
+
+		}
+
+		return printList(productArray);
+	}
+
+	private String printList(ArrayList<Integer> list) {
+		final StringBuilder builder = new StringBuilder();
+		for (final int digit : list) {
+			if (builder.length() > 0 || digit != 0) {
+				builder.append(digit);
+			}
+		}
+
+		return builder.toString();
+	}
+	
 	public static void main(String[] args){
 		MathFunctions funcs = new MathFunctions();
 
-		System.out.println(funcs.findFactors(0));
+		// Some test cases
+		System.out.println(funcs.multiply("654","20"));
 		System.out.println(funcs.longestConsecutive(Arrays.asList(0, 0, 1, 4, 3, 8, 1, 6, 0, 5)));
-		
-	    System.out.println(funcs.getLCS("ABCAAABBABBCCABCBACABABABCCBC", "ABCABABABCBACABCBACABABACBCB"));
+	    System.out.println(funcs.getLCS("CDDABDACBC", "DCAAAACD"));
     }
 }
