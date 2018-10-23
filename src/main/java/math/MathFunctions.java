@@ -312,7 +312,7 @@ public class MathFunctions {
 	}
 	
 	public String multiply(String a, String b) {
-		if ("0".equals(a) || "0".equals(b))
+		if ("0".equals(a) || "0".equals(b) || a.equals("") || b.equals(""))
 		{
 			return "0";
 		}
