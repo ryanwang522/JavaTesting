@@ -27,3 +27,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+apply plugin: "jacoco"
+
+jacoco { 
+	toolVersion = "0.8.1"
+}
